@@ -1,0 +1,80 @@
+.signUpHeader
+{
+    color: gray;
+    font-weight: 500;
+    text-align: left;
+}
+.containerSignup
+{
+ display: flex; 
+ justify-content: space-around;
+}
+.form
+{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+input,button
+{
+    margin: 1em 0em;
+    height: 1vw;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+input{
+    padding:1em 1em;
+}
+.nextButton
+{
+    background-color: black;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+    height: 2.5vw;
+    width: 50%;
+}
+.leftContainerSignup
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    width: 50%;
+    margin-left: 5em;
+}
+.rightContainerSignup
+{
+    width: 50%;
+}
+.signupImage
+{
+    width: 90%;
+}
+.skillsList
+{
+    list-style: none;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    max-height: 20px;
+}
+.listandinput
+{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+ul
+{
+  
+    top: 60%;
+    overflow-y: scroll;
+    height: 10vw;
+    margin-top: -0.8em;
+}
+li
+{
+    cursor: pointer;
+    text-align: center;
+}

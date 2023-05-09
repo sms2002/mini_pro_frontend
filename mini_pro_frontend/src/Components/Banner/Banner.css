@@ -1,0 +1,66 @@
+.container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.leftDiv
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 5em 5em;
+}
+.bannerHeader
+{
+    text-align: left;
+    font-size: 2.5vw;
+    width: 220%;
+
+}
+.bannerPara
+{
+    text-align: left;
+    font-size: 1.4vw;
+    width: 220%;
+
+}
+
+.bannerImg
+{
+    width: 50%;
+}
+.getStarted
+{
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    width: 50%;
+    
+    height: 3vw;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 2vw;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-top: 1em;
+    min-width: 10rem;
+}
+.signIn
+{
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    width: 10%;
+    position:absolute;
+    top: 3vw;
+    left: 70vw;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    height: 2vw;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1.3vw;
+}
