@@ -3,16 +3,16 @@ import "./Signup.css";
 import signupImage from "../../assets/signup.jpg";
 import validator from "validator";
 import axios from "axios";
+import Alert from '@mui/material/Alert';
 import { access_token } from "../../access";
 function Signup() {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [showList, setshowList] = useState(true);
   const [emailError, setEmailError] = useState(false);
+  const [errorMessage, seterrorMessage] = useState('');
+  const [showAlert, setshowAlert] = useState(false)
   const [languages, setlanguages] = useState([]);
-  const [skills, setskills] = useState([]);
-  const [access, setaccess] = useState("");
   const baseUrl = "http://127.0.0.1:8000";
-
   useEffect(() => {
     fetchData(access_token)
   }, []);
@@ -23,7 +23,7 @@ function Signup() {
       },
     };
     axios
-      .get(`${baseUrl}/api/jobs/search/skills`, config)
+      .get(`${baseUrl}/api/jobs/search/skills/`, config)
       .then((response) => {
         console.log(response.data);
         setlanguages(response.data);
@@ -48,30 +48,34 @@ function Signup() {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
     console.log(formValues.email);
+    if (e.target.name === 'email') {
+      validateEmail(e);
+    }
   };
   const handleNext = (e) => {
     e.preventDefault();
-    if(!emailError&&formValues.username.length>0&&formValues.password.length>0)
+    if(!emailError&&formValues.username.length>0&&formValues.password.length>0&&formValues.email.length>0)
     {
     setShowAdditionalInfo(true);
+    setshowAlert(false)
+    }
+    else if(formValues.username.length===0)
+    {
+      seterrorMessage("Sorry, but the username field is empty. Please provide a valid username and try again!!");
+      setshowAlert(true)
+    }
+    else if(emailError||formValues.email.length===0)
+    {
+      seterrorMessage("Sorry, but the email you entered is incorrect. Please double-check your email address and try again!!")
+      setshowAlert(true)
+    }
+    else if(formValues.password.length===0)
+    {
+      seterrorMessage("Sorry, but the password field is empty. Please provide a valid  and try again!!")
+      setshowAlert(true)
     }
   };
-  const skillsList = [
-    "JavaScript",
-    "Python",
-    "Java",
-    "C++",
-    "Ruby",
-    "CSS",
-    "HTML",
-    "React",
-    "Angular",
-    "Vue",
-    "JavaScript aaa",
-  ];
   const [searchTerm, setSearchTerm] = useState("");
-
-
   const filteredSkills = languages.filter((skill) =>
     skill.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -86,6 +90,7 @@ function Signup() {
         <div className="leftContainerSignup">
           <h1 className="signUpHeader">Step 1</h1>
           <form className="form">
+          {showAlert&&<Alert className="alert"severity="error">{errorMessage}</Alert>}
             <input
               onChange={(e) => handleChange(e)}
               type="text"
@@ -96,7 +101,7 @@ function Signup() {
             />
             <input
               type="email"
-              onChange={(e) => {handleChange(e);validateEmail(e);}}
+              onChange={(e) => {handleChange(e);}}
               name="email"
               placeholder="Enter your email"
               autoComplete="on"
@@ -150,6 +155,15 @@ function Signup() {
                 </ul>
               )}
             </div>
+            <button
+              className="nextButton"
+              onClick={(e) => {
+                handleNext(e);
+                
+              }}
+            >
+              SUBMIT
+            </button>
           </form>
         </div>
       )}

@@ -34,6 +34,7 @@ input{
     font-family: 'Roboto',sans-serif;
     height: 2.5vw;
     width: 50%;
+    cursor: pointer;
 }
 .leftContainerSignup
 {
@@ -77,4 +78,8 @@ li
 {
     cursor: pointer;
     text-align: center;
+}
+.alert
+{
+    width: 90%;
 }
