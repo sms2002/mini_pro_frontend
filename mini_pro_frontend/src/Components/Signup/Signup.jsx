@@ -12,6 +12,9 @@ function Signup() {
   const [errorMessage, seterrorMessage] = useState('');
   const [showAlert, setshowAlert] = useState(false)
   const [languages, setlanguages] = useState([]);
+  const [count, setcount] = useState(0)
+  const [selectedSkills, setselectedSkills] = useState([]);
+  const [finalskillslist, setfinalskillslist] = useState('')
   const baseUrl = "http://127.0.0.1:8000";
   useEffect(() => {
     fetchData(access_token)
@@ -52,6 +55,45 @@ function Signup() {
       validateEmail(e);
     }
   };
+  function handleDeleteItem(itemToDelete) {
+    const newArray = selectedSkills.filter(item => item !== itemToDelete);
+    setselectedSkills(newArray);
+    setcount(count-1);
+    console.log(itemToDelete);
+  }
+  function handleSubmit(e)
+  {
+    e.preventDefault();
+    console.log(selectedSkills);
+    if(count===0)
+    {
+      setshowAlert(true);
+      seterrorMessage("Please select atleast 1 skill");
+    }
+    else
+    {
+      setshowAlert(false);
+      setfinalskillslist(selectedSkills.join(','))
+      handlePostRequest();
+    }
+  }
+  function handlePostRequest()
+  {
+    const data = {
+      "username": formValues.username,
+      "password": formValues.password,
+      "email": formValues.email,
+      "skills": finalskillslist,
+    };
+    axios.post(`${baseUrl}/api/auth/register/`,data)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error(error.response.data.email);
+      console.error(error.response.data.username);
+    });
+  }
   const handleNext = (e) => {
     e.preventDefault();
     if(!emailError&&formValues.username.length>0&&formValues.password.length>0&&formValues.email.length>0)
@@ -131,6 +173,7 @@ function Signup() {
         <div className="leftContainerSignup">
           <h1 className="signUpHeader">Step 2</h1>
           <form className="form">
+          {showAlert&&<Alert className="alert"severity="error">{errorMessage}</Alert>}
             <div className="listandinput">
               <input
                 type="text"
@@ -145,6 +188,18 @@ function Signup() {
                       onClick={() => {
                         setSearchTerm(skill);
                         setshowList(false);
+                        if (selectedSkills.includes(skill)) {
+                          
+                          return;
+                        }
+                        else{
+                        setselectedSkills((prevItems) => {
+                          const updatedItems = [...prevItems, skill];
+                          return updatedItems;
+                        });
+                        setcount(count+1);
+                      }
+                        
                       }}
                       className="skillsList"
                       key={skill}
@@ -154,11 +209,20 @@ function Signup() {
                   ))}
                 </ul>
               )}
+              <div className="selectedskillcontainer">
+            {selectedSkills.map((item)=>{
+                return(<div className="genreDiv">
+                <div className="genreHeader">{item}</div>
+                <div onClick={() => {handleDeleteItem(item);}
+                }className="closeButton">X</div>
+            </div>);
+              })}
+            </div>
             </div>
             <button
               className="nextButton"
               onClick={(e) => {
-                handleNext(e);
+                handleSubmit(e);
                 
               }}
             >

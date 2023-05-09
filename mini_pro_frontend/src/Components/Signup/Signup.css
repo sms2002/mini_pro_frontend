@@ -83,3 +83,37 @@ li
 {
     width: 90%;
 }
+.genreDiv
+  {
+    width: 40%;
+    height: 2.25rem;
+    background-color: #b6d6e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 2%;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    color: white;
+    border-radius: 1rem;
+    margin-right: 2em;
+  }
+  .genreHeader
+  {
+    margin-left: 20%;
+    font-size: 1rem
+  }
+  .closeButton
+  {
+    color:#394867;
+    margin-left: auto; 
+    font-size: 1rem; 
+    cursor: pointer;
+    padding-right: 5%;
+  }
+  .selectedskillcontainer
+  {
+    display: flex;
+    flex-wrap: wrap;
+  }
