@@ -1,1 +1,2 @@
 export const access_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1MTgzOTQ2LCJpYXQiOjE2ODM2NDc5NDYsImp0aSI6IjFmZmJmZDMzNmRiZTQyOWJhMmU4ODBjMjZjMDgxOGM2IiwidXNlcl9pZCI6ImFkbWluIn0.OPHZ-mYty_g7k1AUloDvG20j_7jHEKaZLXhb4yWtSdM"
+export const baseUrl="http://127.0.0.1:8000"

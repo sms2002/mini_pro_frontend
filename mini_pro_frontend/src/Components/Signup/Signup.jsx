@@ -1,10 +1,11 @@
 import { React, useState, useEffect } from "react";
 import "./Signup.css";
-import signupImage from "../../assets/signup.jpg";
+import signupImage from '../../assets/signup1.jpg'
 import validator from "validator";
 import axios from "axios";
 import Alert from '@mui/material/Alert';
 import { access_token } from "../../access";
+import { useNavigate } from "react-router-dom";
 function Signup() {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [showList, setshowList] = useState(true);
@@ -16,6 +17,7 @@ function Signup() {
   const [selectedSkills, setselectedSkills] = useState([]);
   const [finalskillslist, setfinalskillslist] = useState('')
   const baseUrl = "http://127.0.0.1:8000";
+  const navigate=useNavigate();
   useEffect(() => {
     fetchData(access_token)
   }, []);
@@ -87,11 +89,36 @@ function Signup() {
     };
     axios.post(`${baseUrl}/api/auth/register/`,data)
     .then(response => {
-      console.log(response.data);
+      handleLogin()
     })
     .catch(error => {
-      console.error(error.response.data.email);
-      console.error(error.response.data.username);
+      if(error.response.data.username)
+      {
+        seterrorMessage(error.response.data.username);
+        setshowAlert(true);
+        setShowAdditionalInfo(false);
+      }
+      else{
+      seterrorMessage(error.response.data.email);
+      setshowAlert(true)
+      setShowAdditionalInfo(false);
+      }
+    });
+  }
+  function handleLogin()
+  {
+    const data={
+      "username":formValues.username,
+      "password":formValues.password,
+    }
+    axios.post(`${baseUrl}/api/auth/login/`,data)
+    .then(response => {
+      console.log(response.data)
+      localStorage.setItem("userAccess",response.data.access)
+      navigate('/landing')
+    })
+    .catch(error => {
+      alert(error.response.data)
     });
   }
   const handleNext = (e) => {
@@ -140,6 +167,7 @@ function Signup() {
               placeholder="Enter your username"
               autoComplete="on"
               required
+              value={formValues.username}
             />
             <input
               type="email"
@@ -148,6 +176,7 @@ function Signup() {
               placeholder="Enter your email"
               autoComplete="on"
               required
+              value={formValues.email}
             />
             <input
               onChange={(e) => handleChange(e)}
@@ -156,7 +185,9 @@ function Signup() {
               placeholder="Enter Password"
               autoComplete="on"
               required
+              value={formValues.password}
             />
+            <div className="already">Already have an account?<span onClick={()=>{navigate('/login')}} style={{color:'blue',paddingLeft:'0.5em',cursor:'pointer'}}>SignIn</span></div>
             <button
               className="nextButton"
               onClick={(e) => {
@@ -167,6 +198,7 @@ function Signup() {
               NEXT
             </button>
           </form>
+          
         </div>
       )}
       {showAdditionalInfo && (
