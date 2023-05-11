@@ -115,6 +115,7 @@ function Signup() {
     .then(response => {
       console.log(response.data)
       localStorage.setItem("userAccess",response.data.access)
+      
       navigate('/landing')
     })
     .catch(error => {

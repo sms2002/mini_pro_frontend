@@ -1,0 +1,58 @@
+.landingHeader
+{
+    font-family: 'Roboto',sans-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    text-align: left;
+}
+.landingContainer
+{
+    top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.landingBody
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3em;
+    width: 100%;
+}
+.landingBox
+{
+    flex-basis: 20%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+.firstBox:hover
+{
+    transform: scale(1.1);
+}
+.secondBox:hover
+{
+    transform: scale(1.1);
+}
+/* .landingBox :hover
+{
+    transform: scale(1.1);
+} */
+.jobImage
+{
+    width: 20%;
+}
+.jobTitle
+{
+    padding-left: 1em;
+}
+li
+{
+    margin-top: 1em;
+}

@@ -1,0 +1,54 @@
+.navbarContainer
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+.navbarLogo
+{
+    width: 15%;
+}
+.userImage
+{
+    width: 3%;
+    cursor: pointer;
+
+}
+.usernameHeader
+{
+    width: 10%;
+    margin-right: -5em;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    color:#022282 ;
+}
+
+  
+  .userImage:hover + .dropdown-menu {
+    display: block;
+  }
+  .dropdown-menu:hover
+  {
+    display: block;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    padding: 0.1rem;
+    background-color: white;
+    list-style-type: none;
+    font-family: 'Roboto',sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 5vw;
+    width: 8%;
+  }
+
+li
+{
+    text-align: left;
+}
