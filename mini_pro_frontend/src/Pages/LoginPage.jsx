@@ -12,7 +12,7 @@ function LoginPage() {
       if (localStorage.getItem('userAccess')) {
         navigate('/landing');
       }
-    }, 1000);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
   return (

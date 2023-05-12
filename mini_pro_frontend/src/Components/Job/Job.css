@@ -1,0 +1,50 @@
+.jobContainer
+{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+}
+.listandinput
+{
+    display: flex;
+    flex-direction: column;
+    width:30vw;
+    margin-top: 3vw;
+    margin-left: 3vw;
+}
+ul
+{
+  
+    top: 60%;
+    overflow-y: scroll;
+    height: 15vw;
+    margin-top: -0.8em;
+}
+li
+{
+    cursor: pointer;
+    text-align: center;
+}
+input,button
+{
+    margin: 1em 0em;
+    height: 1vw;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 1.2vw;
+}
+input{
+    padding:1em 1em;
+}
+.cardDivFlex
+{
+    width: 50%;
+  background-color: white;
+  padding-left: 1em;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  height: 35rem;
+  overflow-y: scroll;
+}

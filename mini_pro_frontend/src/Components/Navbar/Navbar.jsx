@@ -4,9 +4,11 @@ import logo from "../../assets/logo-no-background.png";
 import user from "../../assets/user.png";
 import { baseUrl } from "../../access";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [username, setusername] = useState("");
+  const navigate=useNavigate();
 
   useEffect(() => {
     const userToken = localStorage.getItem("userAccess");
@@ -36,7 +38,10 @@ function Navbar() {
         <img className="userImage" src={user} alt="" />
         <ul className="dropdown-menu">
           <li>View Profile</li>
-          <li>SignOut</li>
+          <li className='signout'onClick={()=>{
+            localStorage.setItem("userAccess",'');
+            navigate('/')
+          }}>SignOut</li>
         </ul>
     </div>
   );

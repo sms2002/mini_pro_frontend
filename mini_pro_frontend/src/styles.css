@@ -1,0 +1,13 @@
+.jobPageFlex
+{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+}
+/* .jobCardFlex
+{
+display: flex;
+flex-direction: column;
+height: 30rem;
+overflow-y: scroll;
+} */

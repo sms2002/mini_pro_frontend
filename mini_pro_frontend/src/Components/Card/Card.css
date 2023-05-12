@@ -1,0 +1,99 @@
+.card {
+  width: 50%;
+  background-color: white;
+  padding-left: 1em;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  height: 35rem;
+  overflow-y: scroll;
+}
+
+.card-content {
+  margin-top: 1.75em;
+  padding: 1.25rem;
+  color: black;
+  border-radius: 1.5rem;
+  position: relative;
+  border: 1px solid gray;
+}
+
+.main-data {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.additional-data {
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+
+.buttonCard {
+    background-color: #0020c2;
+    height: 2rem;
+    color: white;
+    border-radius: 0.5rem;
+    width: 20%;
+  }
+  .hoverCard
+  {
+    background-color: white;
+    transition: background-color 0.3s ease;
+    color: black;
+    border: 1px solid gray;
+  }
+  .hoverCard:hover
+  {
+    background-color: gray;
+  }
+
+.buttons
+{
+    display: flex;
+    justify-content: space-between;
+}
+p {
+  font-family: "Roboto", sans-serif;
+  color: black;
+  font-weight: 500;
+}
+.locationpay {
+  display: flex;
+  align-items: center;
+}
+.location,
+.money {
+  width: 3%;
+  height: 3%;
+  margin-right: 0.5em;
+}
+.locationHeader {
+  margin-right: 2em;
+}
+.companySkills {
+  display: flex;
+  flex-wrap: wrap;
+}
+.companyskillContainer {
+  width: fit-content;
+  min-width: 15%;
+  background-color: rgba(0, 0, 0, 0.671);
+  border-radius: 2rem;
+  padding: 0em 0.5em;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+  margin-top: 0.5em;
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+}
+
+.skillHeaderCompany {
+  font-weight: 500;
+  font-size: 0.6rem;
+  transition: font-size 0.2s;
+}

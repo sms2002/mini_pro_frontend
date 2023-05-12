@@ -1,0 +1,102 @@
+import React, { useEffect, useState } from "react";
+import { access_token, baseUrl } from "../../access";
+import axios from "axios";
+import "./Job.css";
+import Card from "../Card/Card";
+function Job() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showList, setshowList] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const [object, setobject] = useState([]);
+  const [chosenSkill, setchosenSkill] = useState("");
+  const [userToken, setuserToken] = useState("");
+  const [companyName, setcompanyName] = useState("");
+  const [title, settitle] = useState("");
+  const [location, setlocation] = useState("");
+  const [pay, setpay] = useState("");
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("userAccess");
+    setuserToken(userToken);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    };
+    axios
+      .get(`${baseUrl}/api/jobs/search/scrape-jobs/`, config)
+      .then((response) => {
+        console.log(response.data);
+        setJobs(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    console.log(chosenSkill);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    if (chosenSkill) {
+      axios
+        .get(`${baseUrl}/api/jobs/scrape-result/${chosenSkill}/`, config)
+        .then((response) => {
+          setobject(response.data[chosenSkill]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [chosenSkill]);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    setshowList(true);
+  };
+  const filteredSkills = jobs.filter((skill) =>
+    skill.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
+    <div className="jobContainer">
+      <div className="listandinput">
+        <input
+          type="text"
+          placeholder="Search for a skill..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        {jobs.length > 0 && filteredSkills.length > 0 && showList && (
+          <ul className="skills-list">
+            {filteredSkills.map((skill) => (
+              <li
+                onClick={() => {
+                  setSearchTerm(skill);
+                  setchosenSkill(skill);
+                  setshowList(false);
+                }}
+                className="skillsList"
+                key={skill}
+              >
+                {skill}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="cardDivFlex">
+        {object.map((item) => {
+          const string=(item.missing_skills).join(',')
+          return (  
+            <Card title={item.title} companyName={item.company_name} location={item.location} missing={string} companySkills={item.company_skills} pay={item.avg_base_pay_est} link={item.company_link}/>
+          );
+        })}
+        
+      </div>
+    </div>
+  );
+}
+
+export default Job;
