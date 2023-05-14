@@ -16,7 +16,10 @@
   position: relative;
   border: 1px solid gray;
 }
-
+.card-content:first-child
+{
+    margin-top: 0%;
+}
 .main-data {
   opacity: 1;
   transition: opacity 0.5s ease;
@@ -36,6 +39,7 @@
     color: white;
     border-radius: 0.5rem;
     width: 20%;
+    cursor: pointer;
   }
   .hoverCard
   {

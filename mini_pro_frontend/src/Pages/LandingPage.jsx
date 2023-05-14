@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Components/Loading/Loading';
 function LandingPage() {
   //!localStorage.getItem("userAccess")||localStorage.getItem("userAccess")===''
-  const location=useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const navigate=useNavigate();
   useEffect(() => {

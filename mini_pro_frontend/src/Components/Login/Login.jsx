@@ -17,6 +17,10 @@ function Login() {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
     console.log(formValues);
   };
+  function navigatePage()
+  {
+    navigate('/landing')
+  }
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
@@ -26,7 +30,7 @@ function Login() {
     axios.post(`${baseUrl}/api/auth/login/`,data)
     .then(response => {
       localStorage.setItem("userAccess",response.data.access)
-      navigate('/landing')
+      navigatePage();
       setshowAlert(false);
     })
     .catch(error => {

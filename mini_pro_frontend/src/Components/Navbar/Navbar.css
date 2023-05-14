@@ -46,6 +46,7 @@
     cursor: pointer;
     height: 5vw;
     width: 8%;
+    z-index: 1;
   }
 
 li

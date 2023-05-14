@@ -9,13 +9,11 @@
     display: flex;
     flex-direction: column;
     width:30vw;
-    margin-top: 3vw;
     margin-left: 3vw;
 }
 ul
 {
   
-    top: 60%;
     overflow-y: scroll;
     height: 15vw;
     margin-top: -0.8em;

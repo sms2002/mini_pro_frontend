@@ -75,23 +75,24 @@ function Signup() {
     else
     {
       setshowAlert(false);
-      setfinalskillslist(selectedSkills.join(','))
       handlePostRequest();
     }
   }
-  function handlePostRequest()
+  async function handlePostRequest()
   {
+    const finalskillslist=selectedSkills.join(',')
     const data = {
       "username": formValues.username,
       "password": formValues.password,
       "email": formValues.email,
       "skills": finalskillslist,
     };
-    axios.post(`${baseUrl}/api/auth/register/`,data)
-    .then(response => {
-      handleLogin()
-    })
-    .catch(error => {
+    try{
+      const response=await axios.post(`${baseUrl}/api/auth/register/`,data)
+      await handleLogin()
+    }
+    catch (error)
+    {
       if(error.response.data.username)
       {
         seterrorMessage(error.response.data.username);
@@ -103,24 +104,26 @@ function Signup() {
       setshowAlert(true)
       setShowAdditionalInfo(false);
       }
-    });
+    };
   }
-  function handleLogin()
+  async function handleLogin()
   {
+    console.log('Login successful:');
     const data={
       "username":formValues.username,
       "password":formValues.password,
     }
-    axios.post(`${baseUrl}/api/auth/login/`,data)
-    .then(response => {
+    try{
+    const response=await axios.post(`${baseUrl}/api/auth/login/`,data)
       console.log(response.data)
+      console.log('Login successful:', response.data);
       localStorage.setItem("userAccess",response.data.access)
-      
       navigate('/landing')
-    })
-    .catch(error => {
+    }
+    catch(error){
+      console.error('Login failed:', error.response.data);
       alert(error.response.data)
-    });
+    }
   }
   const handleNext = (e) => {
     e.preventDefault();
@@ -192,8 +195,7 @@ function Signup() {
             <button
               className="nextButton"
               onClick={(e) => {
-                handleNext(e);
-                
+                handleNext(e); 
               }}
             >
               NEXT
@@ -219,7 +221,7 @@ function Signup() {
                   {filteredSkills.map((skill) => (
                     <li
                       onClick={() => {
-                        setSearchTerm(skill);
+                        setSearchTerm('');
                         setshowList(false);
                         if (selectedSkills.includes(skill)) {
                           
@@ -256,7 +258,6 @@ function Signup() {
               className="nextButton"
               onClick={(e) => {
                 handleSubmit(e);
-                
               }}
             >
               SUBMIT
