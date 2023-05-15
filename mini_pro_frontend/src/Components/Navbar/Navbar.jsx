@@ -37,7 +37,7 @@ function Navbar() {
       </div>
         <img className="userImage" src={user} alt="" />
         <ul className="dropdown-menu">
-          <li>View Profile</li>
+          <li onClick={()=>{navigate('/viewprofile')}}>View Profile</li>
           <li className='signout'onClick={()=>{
             localStorage.setItem("userAccess",'');
             navigate('/')

@@ -5,6 +5,7 @@ import SignupPage from './Pages/SignupPage';
 import LoginPage from './Pages/LoginPage';
 import Landing from './Pages/LandingPage';
 import JobPage from './Pages/JobPage';
+import ViewProfilepage from './Pages/ViewProfilepage';
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/landing' element={<Landing/>}/>
       <Route path='/job' element={<JobPage/>}/>
+      <Route path='/viewprofile' element={<ViewProfilepage/>}/>
      </Routes>
     </div>
   );
