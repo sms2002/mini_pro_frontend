@@ -3,14 +3,21 @@ import "./Card.css";
 import location from "../../assets/location.png";
 import cash from "../../assets/cash.png";
 function Card(props) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleHover = () => {
-    setIsHovered(true);
+  const [isHoveredMissing, setIsHoveredMissing] = useState(false);
+  const [isHoveredMatching, setIsHoveredMatching] = useState(false);
+  const handleHoverMissing = () => {
+    setIsHoveredMissing(true);
   };
 
-  const handleLeave = () => {
-    setIsHovered(false);
+  const handleLeaveMissing = () => {
+    setIsHoveredMissing(false);
+  };
+  const handleHoverMatching = () => {
+    setIsHoveredMatching(true);
+  };
+
+  const handleLeaveMatching = () => {
+    setIsHoveredMatching(false);
   };
   return (
     
@@ -32,28 +39,58 @@ function Card(props) {
             <img src={location} alt="" className="location" />
             <h5 className="locationHeader">{props.location}</h5>
             <img src={cash} alt="" className="money" />
-            <h5 className="locationHeader">{props.pay}</h5>
+            <h5 className="locationHeader">{props.pay==='#N/A'?'No glassdoor estimate':props.pay}</h5>
           </div>
           
           <div className="buttons">
             <button
-              onMouseEnter={handleHover}
-              onMouseLeave={handleLeave}
+              onMouseEnter={handleHoverMissing}
+              onMouseLeave={handleLeaveMissing}
               className="buttonCard hoverCard"
             >
               Missing Skills
             </button>
+            <button
+              onMouseEnter={handleHoverMatching}
+              onMouseLeave={handleLeaveMatching}
+              className="buttonCard hoverCard matchingbutton"
+            >
+              Matching Skills
+            </button>
             <button onClick={()=>{window.open(props.link,'_blank')}}className="buttonCard">Apply</button>
           </div>
-        </div>
-        {isHovered&&props.missing&&(
-          <div className="additional-data">
-            <p>{props.missing}</p>
+          {isHoveredMissing&&props.missing.length>0&&(
+          <div  onMouseEnter={handleHoverMissing}
+          onMouseLeave={handleLeaveMissing} className="additional-data">
+            <div className="companySkills">
+            {props.missing.map((item)=>{
+                return(
+                    <div className="companyskillContainer">
+              <h3 className="skillHeaderCompany">{item}</h3>
+            </div>
+                )
+            })}
+            
+          </div>
+          </div>
+            )} 
+            {isHoveredMatching&&props.matching.length>0&&(
+          <div  onMouseEnter={handleHoverMatching}
+          onMouseLeave={handleLeaveMatching} className="additional-data">
+            <div className="companySkills">
+            {props.matching.map((item)=>{
+                return(
+                    <div className="companyskillContainer">
+              <h3 className="skillHeaderCompany">{item}</h3>
+            </div>
+                )
+            })}
+            
+          </div>
           </div>
             )}
-        {/* <div className="additional-data">
-        <p>python,sql,django</p>
-      </div> */}
+        </div>
+
       </div>
 
   );

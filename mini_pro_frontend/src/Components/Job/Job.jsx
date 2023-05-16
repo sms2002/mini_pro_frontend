@@ -88,9 +88,9 @@ function Job() {
       </div>
       <div className="cardDivFlex">
         {object.map((item) => {
-          const string=(item.missing_skills).join(',')
+          console.log(item)
           return (  
-            <Card title={item.title} companyName={item.company_name} location={item.location} missing={string} companySkills={item.company_skills} pay={item.avg_base_pay_est} link={item.company_link}/>
+            <Card title={item.title} companyName={item.company_name} location={item.location} missing={item.missing_skills} companySkills={item.company_skills} pay={item.avg_base_pay_est} link={item.company_link} matching={item.matching_skills}/>
           );
         })}
         

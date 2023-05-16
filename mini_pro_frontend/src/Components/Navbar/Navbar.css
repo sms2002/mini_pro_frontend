@@ -9,6 +9,7 @@
 .navbarLogo
 {
     width: 15%;
+    cursor: pointer;
 }
 .userImage
 {

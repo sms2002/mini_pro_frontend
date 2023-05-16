@@ -29,13 +29,13 @@ function Navbar() {
 
   return (
     <div className="navbarContainer">
-      <div>
+      <div onClick={()=>{navigate('/landing')}}>
         <img className="navbarLogo" src={logo} alt="logo" />
       </div>
       <div className="username">
         <h3 className="usernameHeader">{username}</h3>
       </div>
-        <img className="userImage" src={user} alt="" />
+        <img onClick={()=>{navigate('/landing')}}className="userImage" src={user} alt="" />
         <ul className="dropdown-menu">
           <li onClick={()=>{navigate('/viewprofile')}}>View Profile</li>
           <li className='signout'onClick={()=>{
