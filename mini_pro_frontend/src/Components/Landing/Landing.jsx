@@ -14,7 +14,7 @@ function Landing() {
             <img className="jobImage" src={job} alt="" />
             <h1 className='jobTitle'>Jobs Placed</h1>
         </div>
-        <div className="secondBox landingBox">
+        <div onClick={()=>{navigate('/mcq')}} className="secondBox landingBox">
         <img className="jobImage" src={test} alt="" />
             <h1 className='jobTitle'>MCQ Test</h1>
         </div>

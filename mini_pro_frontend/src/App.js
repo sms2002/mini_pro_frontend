@@ -6,6 +6,7 @@ import LoginPage from './Pages/LoginPage';
 import Landing from './Pages/LandingPage';
 import JobPage from './Pages/JobPage';
 import ViewProfilepage from './Pages/ViewProfilepage';
+import McqLandingPage from './Pages/McqLandingPage';
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
       <Route path='/landing' element={<Landing/>}/>
       <Route path='/job' element={<JobPage/>}/>
       <Route path='/viewprofile' element={<ViewProfilepage/>}/>
+      <Route path='/mcq' element={<McqLandingPage/>}/>
      </Routes>
     </div>
   );
