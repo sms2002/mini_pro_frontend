@@ -6,7 +6,9 @@ import axios from "axios";
 import { baseUrl } from "../../access";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 function Mcq() {
+  const navigate=useNavigate();
   const [LatestArray, setLatestArray] = useState([]);
   const [percentage, setpercentage] = useState(0);
   const [score, setscore] = useState(0);
@@ -60,6 +62,7 @@ function Mcq() {
         </div>
         <div className="prevTestContainer">
         {LatestArray.map((item,index)=>{
+          console.log(item.id)
           const score=item.results.scores.total_score;
           const percentage=(score / 40) * 100
           const getBackgroundColor = () => {
@@ -74,7 +77,7 @@ function Mcq() {
         
           const backgroundColor = getBackgroundColor();
           return(
-            <div className="testContainer" style={{ background: backgroundColor }}>
+            <div onClick={()=>{navigate('/analysis',{state:{id:item.id}})}} className="testContainer" style={{ background: backgroundColor }}>
             <div>
               <h1>{`Test ${index+1}`}</h1>
             </div>

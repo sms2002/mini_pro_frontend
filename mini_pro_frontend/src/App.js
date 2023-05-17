@@ -7,6 +7,7 @@ import Landing from './Pages/LandingPage';
 import JobPage from './Pages/JobPage';
 import ViewProfilepage from './Pages/ViewProfilepage';
 import McqLandingPage from './Pages/McqLandingPage';
+import Analysis from './Pages/Analysis';
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
       <Route path='/job' element={<JobPage/>}/>
       <Route path='/viewprofile' element={<ViewProfilepage/>}/>
       <Route path='/mcq' element={<McqLandingPage/>}/>
+      <Route path='/analysis' element={<Analysis/>}/>
      </Routes>
     </div>
   );
