@@ -4,11 +4,14 @@ import { useLocation } from 'react-router-dom'
 
 function Analysis() {
     const location=useLocation()
-  return (
+    const id = location.state && location.state.id;
+
+ 
+  return id? (
     <div>
       <Analyze id={location.state.id}/>
     </div>
-  )
+  ):(<div className="errorMessagePage"><h1>Error 404 page not found :( </h1></div>);
 }
 
 export default Analysis

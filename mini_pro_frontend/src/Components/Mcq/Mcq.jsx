@@ -3,13 +3,16 @@ import { Bar } from "react-chartjs-2";
 import "./Mcq.css";
 import BarChart from "../BarChart/BarChart";
 import axios from "axios";
-import { baseUrl } from "../../access";
+import { access_token, baseUrl } from "../../access";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
 function Mcq() {
+
   const navigate=useNavigate();
   const [LatestArray, setLatestArray] = useState([]);
+  const [Array, setArray] = useState([]);
+  const [userName, setuserName] = useState('');
   const [percentage, setpercentage] = useState(0);
   const [score, setscore] = useState(0);
   // const CircularScore = (score) => {
@@ -17,6 +20,7 @@ function Mcq() {
   //   setpercentage((score / total) * 100);
   //   setscore(score)
   // };
+  const fortyMinutes = 40 * 60 * 1000;
   const progressBarStyles = {
     root: {}, // modify the root container styles if needed
     path: {
@@ -29,25 +33,63 @@ function Mcq() {
     },
   };
   useEffect(() => {
+    const userToken = localStorage.getItem("userAccess");
+   
+  }, [])
+  
+  useEffect(() => {
     // axios.get(`http://127.0.0.1:8000/api/technical/prev-results/user/`)
     const userToken = localStorage.getItem("userAccess");
-    const config = {
+    const config2 = {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
     };
     axios
-      .get(`${baseUrl}/api/technical/prev-results/user/`, config)
+      .get(`${baseUrl}/api/auth/user/`, config2)
       .then((response) => {
         console.log(response.data);
-        // const data = response.data;
-        // const scoresArray = data.map((item) => item.results.scores.total_score);
-        setLatestArray(response.data);
+        setuserName(response.data.username)
+        localStorage.setItem("username",response.data.username)
+        // localStorage.setItem('userName',response.data.username)
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        };
+        axios
+          .get(`${baseUrl}/api/technical/prev-results/user/`, config)
+          .then((response) => {
+            console.log(response.data);
+            // const data = response.data;
+            // const scoresArray = data.map((item) => item.results.scores.total_score);
+            setLatestArray(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          // CircularScore()
+          // const config1 = {
+          //   headers: {
+          //     Authorization: `Bearer ${access_token}`,
+            
+          //   }
+          // };
+          // const data = {
+          //   "username": response.data.username,
+          // };
+          // axios.post(`${baseUrl}/api/technical/question/generate/`,data,config1)
+          // .then(response => {
+          //   setArray(response.data);
+          // })
+          // .catch(error => {
+          //   console.log(error)
+          // })
       })
       .catch((error) => {
         console.log(error);
       });
-      // CircularScore()
+   
   }, []);
 
   return (
@@ -57,8 +99,54 @@ function Mcq() {
       </div>
       <div className="prevResultContainer">
         <div className="buttonTestContainer">
-          <button className="testButton">New Test</button>
-          <button className="testButton1">Test Based on similar questions</button>
+          <button onClick={()=>{
+            const config1 = {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              
+              }
+            };
+            const username = localStorage.getItem("username");
+            console.log("Username:", username);
+            const data = {
+              "username": localStorage.getItem("username"),
+            };
+            axios.post(`${baseUrl}/api/technical/question/generate/`,data,config1)
+            .then(response => {
+              const Array=response.data;
+              navigate('/test', { state: { Array,timer:fortyMinutes,show:true } });
+              console.log(response.data)
+            })
+            .catch(error => {
+              console.log(error)
+            });
+            
+            }} className="testButton">New Test</button>
+          <button 
+          onClick={()=>{
+            const config1 = {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              
+              }
+            };
+            const username = localStorage.getItem("username");
+            console.log("Username:", username);
+            const data = {
+              "username": localStorage.getItem("username"),
+            };
+            axios.post(`${baseUrl}/api/technical/question/similar/`,data,config1)
+            .then(response => {
+              const Array=response.data;
+              navigate('/test', { state: { Array,timer:fortyMinutes,show:true } });
+              console.log(response.data)
+            })
+            .catch(error => {
+              console.log(error)
+            });
+            
+            }}
+            className="testButton1">Test Based on similar questions</button>
         </div>
         <div className="prevTestContainer">
         {LatestArray.map((item,index)=>{
@@ -77,7 +165,7 @@ function Mcq() {
         
           const backgroundColor = getBackgroundColor();
           return(
-            <div onClick={()=>{navigate('/analysis',{state:{id:item.id}})}} className="testContainer" style={{ background: backgroundColor }}>
+            <div onClick={()=>{console.log(Array);navigate('/analysis',{state:{id:item.id}})}} className="testContainer" style={{ background: backgroundColor }}>
             <div>
               <h1>{`Test ${index+1}`}</h1>
             </div>

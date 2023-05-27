@@ -3,7 +3,9 @@ import "./Analyze.css";
 import { baseUrl } from "../../access";
 import axios from "axios";
 import BarChartAnalysis from "../BarChartAnalysis/BarChartAnalysis";
+import { Navigate, useNavigate } from "react-router-dom";
 function Analyze(props) {
+  const [array, setarray] = useState([])
   const [activeButton, setActiveButton] = useState(null);
   const [total_Attempted_questions, settotal_Attempted_questions] = useState(0);
   const [total_Attempted_questions_rate, settotal_Attempted_questions_rate] =
@@ -71,6 +73,7 @@ function Analyze(props) {
   const handleButtonClick = (button) => {
     setActiveButton(button);
   };
+  const navigate=useNavigate();
   const chartLabels = ["CN", "DBMS", "OOPS", "OS"]; // Update the labels
   const chartData = {
     attempted: [
@@ -119,7 +122,8 @@ function Analyze(props) {
     axios
       .get(`${baseUrl}/api/technical/prev-results/user/${props.id}/`, config)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.results.user_responses);//pass this array to '/prevtest' using useLocation
+        setarray(response.data.results.user_responses);
         const data = response.data.results.visualization;
         const total_Attempted_questions =
           data.CN_total -
@@ -251,6 +255,7 @@ function Analyze(props) {
   }, []);
 
   return (
+    <div>
     <div className="mainContainerAnalysis">
       <div className="topanalysis">
         <div className="buttonAnalysisContainer">
@@ -325,7 +330,13 @@ function Analyze(props) {
       </div>
 
       <div className="bottomanalysis">
+        <div className="topContainer">
         <h1 className="marksHeader">Marks Distribution</h1>
+        {/*  */}
+        <button onClick={()=>{console.log(props.id);navigate('/prevtest',{state:{Array:array,id:props.id}})}}className="prevTest"><span>View Result</span></button> 
+        {/* pass the array created in line 124 to this */}
+        </div>
+        
         {/* CnCorrect, DbmsCorrect, OopsCorrect, OsCorrect */}
         <div className="cn">
           <h2 className="computernetwork">Computer Network</h2>
@@ -415,6 +426,7 @@ function Analyze(props) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

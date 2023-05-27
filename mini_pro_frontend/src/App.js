@@ -9,8 +9,13 @@ import ViewProfilepage from './Pages/ViewProfilepage';
 import McqLandingPage from './Pages/McqLandingPage';
 import Analysis from './Pages/Analysis';
 import TestPage from './Pages/TestPage';
+import ErrorBoundary from './ErrorBoundary';
+import Prevtest from './Components/PrevTest/Prevtest';
+import PrevTestPage from './Pages/PrevTestPage';
+
 function App() {
   return (
+    <ErrorBoundary fallback="Error 404 Page Not Found">
     <div className="App">
       <Routes>
       <Route path='/' element={<Homepage/>}/>
@@ -22,8 +27,10 @@ function App() {
       <Route path='/mcq' element={<McqLandingPage/>}/>
       <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/test' element={<TestPage/>}/>
+      <Route path='/prevtest' element={<PrevTestPage/>}/>
      </Routes>
     </div>
+    </ErrorBoundary>
   );
 }
 
