@@ -93,6 +93,7 @@ const BarChart = (props) => {
   //         return '#90EE90';
   //     }
   //   };
+  const barWidth = LatestArray.length > 1 ? 0.6 : 0.2;
   return (
     <div className="BarContainer">
       {chartData && chartData.datasets[0].data.length > 0 ? (
@@ -108,6 +109,8 @@ const BarChart = (props) => {
                 beginAtZero: true,
               },
             },
+            responsive: true,
+            barPercentage: barWidth,
           }}
         />
       ) : (

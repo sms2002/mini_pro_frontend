@@ -15,6 +15,7 @@ function Mcq() {
   const [userName, setuserName] = useState('');
   const [percentage, setpercentage] = useState(0);
   const [score, setscore] = useState(0);
+  const [similarerror, setsimilarerror] = useState('')
   // const CircularScore = (score) => {
   //   const total=40;
   //   setpercentage((score / total) * 100);
@@ -91,7 +92,9 @@ function Mcq() {
       });
    
   }, []);
-
+  const closePopup = () => {
+    setsimilarerror('');
+  };
   return (
     <div className="mcqContainer">
       <div className="graphContainer">
@@ -137,17 +140,36 @@ function Mcq() {
             };
             axios.post(`${baseUrl}/api/technical/question/similar/`,data,config1)
             .then(response => {
+              setsimilarerror('');
               const Array=response.data;
               navigate('/test', { state: { Array,timer:fortyMinutes,show:true } });
               console.log(response.data)
             })
             .catch(error => {
-              console.log(error)
+              console.log(error.response.data.error)
+              setsimilarerror(error.response.data.error)
             });
             
             }}
             className="testButton1">Test Based on similar questions</button>
         </div>
+        {similarerror && (
+          <div class="popup">
+          <div class="popup-content">
+            <div
+              onClick={() => {
+                closePopup();
+              }}
+              className="closeButton closeButton1"
+            >
+              x
+            </div>
+            <p>
+              {similarerror}
+            </p>
+          </div>
+        </div>
+        )}
         <div className="prevTestContainer">
         {LatestArray.map((item,index)=>{
           console.log(item.id)
