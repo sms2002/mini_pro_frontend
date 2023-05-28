@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Prevtest() {
   const location=useLocation();
   const navigate=useNavigate();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selected1Option, setselected1Option] = useState(null);
   const [userName, setuserName] = useState("");
   const [questions, setquestions] = useState("");
   const [option_a, setoption_a] = useState("");
@@ -50,7 +50,7 @@ function Prevtest() {
           <h3>{questions}</h3>
           <div className="options">
             <div
-              className={`option ${correctAnswer === "a" ? "selected" : ""}`}
+              className={`option ${correctAnswer === "a" ? "selected1" : ""}`}
             >
               <div className="circle">
                 {correctAnswer === "a" && <div className="dot" />}
@@ -58,7 +58,7 @@ function Prevtest() {
               <span className="spanOptions">{option_a}</span>
             </div>
             <div
-              className={`option ${correctAnswer === "b" ? "selected" : ""}`}
+              className={`option ${correctAnswer === "b" ? "selected1" : ""}`}
             >
               <div className="circle">
                 {correctAnswer === "b" && <div className="dot" />}
@@ -66,7 +66,7 @@ function Prevtest() {
               <span className="spanOptions">{option_b}</span>
             </div>
             <div
-              className={`option ${correctAnswer === "c" ? "selected" : ""}`}
+              className={`option ${correctAnswer === "c" ? "selected1" : ""}`}
             >
               <div className="circle">
                 {correctAnswer === "c" && <div className="dot" />}
@@ -74,7 +74,7 @@ function Prevtest() {
               <span className="spanOptions">{option_c}</span>
             </div>
             <div
-              className={`option ${correctAnswer === "d" ? "selected" : ""}`}
+              className={`option ${correctAnswer === "d" ? "selected1" : ""}`}
             >
               <div className="circle">
                 {correctAnswer === "d" && <div className="dot" />}
