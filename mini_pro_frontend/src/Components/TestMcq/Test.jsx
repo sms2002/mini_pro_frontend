@@ -79,7 +79,7 @@ function Test() {
             const minutes = parseInt(timeParts[1]);
             const seconds = parseInt(timeParts[2].split('.')[0]);
     
-            const remainingTime = (40 * 10) - (minutes * 60 + seconds);
+            const remainingTime = (40 * 60) - (minutes * 60 + seconds);
             const remainingHours = Math.floor(remainingTime / 3600);
             const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
             const remainingSeconds = remainingTime % 60;
