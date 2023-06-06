@@ -44,7 +44,7 @@ function Login() {
         {/*     border: 0 solid #ebf0f5!important; */}
         <div className="loginTopContainer">
           <div className="loginHeader">
-            Signin{" "}
+            Sign in{" "}
             <span onClick={()=>{navigate('/signup')}} className="loginspanheader" style={{ color: "blue" }}>
               Create an account?
             </span>

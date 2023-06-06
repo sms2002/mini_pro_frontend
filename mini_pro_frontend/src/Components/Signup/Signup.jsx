@@ -191,7 +191,7 @@ function Signup() {
               required
               value={formValues.password}
             />
-            <div className="already">Already have an account?<span onClick={()=>{navigate('/login')}} style={{color:'blue',paddingLeft:'0.5em',cursor:'pointer'}}>SignIn</span></div>
+            <div className="already">Already have an account?<span onClick={()=>{navigate('/login')}} style={{color:'blue',paddingLeft:'0.5em',cursor:'pointer'}}>Sign in</span></div>
             <button
               className="nextButton"
               onClick={(e) => {

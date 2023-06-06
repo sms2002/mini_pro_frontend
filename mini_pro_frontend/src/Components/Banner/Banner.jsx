@@ -14,7 +14,7 @@ function Banner() {
         <button className="getStarted"onClick={()=>navigate('/signup')} >Get Started</button>
     </div>
     <div className="rightDiv">
-        <button onClick={()=>{navigate('/login')}}className="signIn">SignIn</button>
+        <button onClick={()=>{navigate('/login')}}className="signIn">Sign in</button>
         <img src={study} alt="study" className="bannerImg" />
         
     </div>

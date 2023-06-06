@@ -3,6 +3,7 @@ import Test from "../Components/TestMcq/Test";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../access";
+import ErrorComponent from "../Components/ErrorComponent/ErrorComponent";
 
 function TestPage() {
   const location = useLocation();
@@ -39,7 +40,7 @@ function TestPage() {
     <div>
       <Test />
     </div>
-  ):(<div className="errorMessagePage"><h1>Error 404 page not found :( </h1></div>);//create an error component and then show that here
+  ):(<div className="errorMessagePage"><ErrorComponent/></div>);//create an error component and then show that here
 }
 
 export default TestPage;

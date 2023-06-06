@@ -3,6 +3,7 @@ import Analyze from '../Components/Analyze/Analyze'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../access';
 import axios from 'axios';
+import ErrorComponent from '../Components/ErrorComponent/ErrorComponent';
 
 function Analysis() {
     const location=useLocation()
@@ -39,7 +40,7 @@ function Analysis() {
     <div>
       <Analyze id={location.state.id}/>
     </div>
-  ):(<div className="errorMessagePage"><h1>Error 404 page not found :( </h1></div>);
+  ):(<div className="errorMessagePage"><h1><ErrorComponent/></h1></div>);
  
 }
 

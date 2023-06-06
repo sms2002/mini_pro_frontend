@@ -12,6 +12,7 @@ import TestPage from './Pages/TestPage';
 import ErrorBoundary from './ErrorBoundary';
 import Prevtest from './Components/PrevTest/Prevtest';
 import PrevTestPage from './Pages/PrevTestPage';
+import ErrorComponent from './Components/ErrorComponent/ErrorComponent';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/test' element={<TestPage/>}/>
       <Route path='/prevtest' element={<PrevTestPage/>}/>
+      <Route path="*" element={<ErrorComponent/>} />
      </Routes>
     </div>
     </ErrorBoundary>

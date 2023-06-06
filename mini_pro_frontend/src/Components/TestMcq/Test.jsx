@@ -66,11 +66,11 @@ function Test() {
       const data = {
         username: response.data.username,
       };
-      
-      
+  
       // Inside your component
-    
-      const interval = setInterval(() => {
+      let intervalId; // Declare the interval variable
+      
+      const interval = () => {
         axios.post(`${baseUrl}/api/technical/time/response/`, data, config)
           .then(response => {
             const timeDifference = response.data.time_difference;
@@ -78,7 +78,7 @@ function Test() {
             const hours = parseInt(timeParts[0]);
             const minutes = parseInt(timeParts[1]);
             const seconds = parseInt(timeParts[2].split('.')[0]);
-    
+  
             const remainingTime = (40 * 60) - (minutes * 60 + seconds);
             const remainingHours = Math.floor(remainingTime / 3600);
             const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
@@ -86,24 +86,24 @@ function Test() {
             settime(remainingTime);
             const formattedRemainingTime = `${remainingHours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
             setRemainingTimeString(formattedRemainingTime);
-    
+  
             if (remainingTime === 0) {
-              clearInterval(interval);
-              
+              clearInterval(intervalId);
             }
           })
           .catch(error => {
             console.log(error);
           });
-      }, 1000); // Call every second (1000 milliseconds)
-    
-      setIntervalId(interval);
-    
+      };
+  
+      intervalId = setInterval(interval, 1000); // Call every second (1000 milliseconds)
+  
+      setIntervalId(intervalId);
+  
       return () => {
-        clearInterval(interval);
+        clearInterval(intervalId);
       };
     })
-    
   }, []);
   
 useEffect(() => {
@@ -129,6 +129,9 @@ useEffect(() => {
   }, [id, Array, selectedOptions]);
 
   const handleSubmit = () => {
+
+    clearInterval(intervalId);
+
     const formattedOptions = {};
     Array.forEach((question) => {
       const questionId = question.question_id;

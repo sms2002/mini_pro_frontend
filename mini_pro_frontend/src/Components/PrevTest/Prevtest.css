@@ -201,3 +201,30 @@
   border-radius: 1rem;
   color: white;
 }
+/* For screens with a width of 1024px and above */
+@media screen and (min-width: 1024px) and (max-width:1440px) {
+  /* CSS rules for screens with width 1024px and above */
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 500px; /* Added max-width */
+    margin: auto; /* Added */
+    top: 120%;
+    position: fixed;
+  }
+}
+
+/* For screens with a width between 768px and 1023px */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  /* CSS rules for screens with width between 768px and 1023px */
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 500px; /* Added max-width */
+    margin: auto; /* Added */
+    top: 120%;
+    position: fixed;
+  }
+}
