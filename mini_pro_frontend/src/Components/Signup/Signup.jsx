@@ -212,7 +212,7 @@ function Signup() {
             <div className="listandinput">
               <input
                 type="text"
-                placeholder="Search for a Language"
+                placeholder="Search for Skills"
                 value={searchTerm}
                 onChange={handleSearch}
               />

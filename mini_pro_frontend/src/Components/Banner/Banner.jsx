@@ -7,9 +7,10 @@ function Banner() {
   return (
     <div className='container'>
     <div className="leftDiv">
-      <h1 className="bannerHeader">LOREM IPSUM DOLOR <br/>SIT AMET</h1>
-      <p className="bannerPara">Suspendisse vel ultricies felis.<br/> 
-      Donec molestie accumsan aliquet. Duis porta sodales pretium
+      <h1 className="bannerHeader">Placement Assist</h1>
+      
+      <p className="bannerPara">Find your dream job with personalized recommendations <br/> 
+      and assess your skills on our platform.
         </p>
         <button className="getStarted"onClick={()=>navigate('/signup')} >Get Started</button>
     </div>
