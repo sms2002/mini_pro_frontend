@@ -3,6 +3,7 @@ import { access_token, baseUrl } from "../../access";
 import axios from "axios";
 import "./Job.css";
 import Card from "../Card/Card";
+import { useNavigate } from "react-router-dom";
 function Job() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showList, setshowList] = useState(false);
@@ -14,7 +15,10 @@ function Job() {
   const [title, settitle] = useState("");
   const [location, setlocation] = useState("");
   const [pay, setpay] = useState("");
-
+  const navigate=useNavigate();
+  const handleClick = () => {
+    navigate('/devsurvey');
+  };
   useEffect(() => {
     const userToken = localStorage.getItem("userAccess");
     setuserToken(userToken);
@@ -34,12 +38,30 @@ function Job() {
       });
   }, []);
   useEffect(() => {
+    const userToken = localStorage.getItem("userAccess");
+    setuserToken(userToken);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    axios
+      .get(`${baseUrl}/api/jobs/scrape-result/Data Scientist/`, config)
+      .then((response) => {
+        setobject(response.data["Data Scientist"]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
     console.log(chosenSkill);
     const config = {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
     };
+
     if (chosenSkill) {
       axios
         .get(`${baseUrl}/api/jobs/scrape-result/${chosenSkill}/`, config)
@@ -51,6 +73,7 @@ function Job() {
         });
     }
   }, [chosenSkill]);
+  
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -85,15 +108,25 @@ function Job() {
             ))}
           </ul>
         )}
+             <a className="developersurvey" onClick={handleClick}>See the developer survey &gt;&gt;</a>
       </div>
+     
       <div className="cardDivFlex">
         {object.map((item) => {
-          console.log(item)
-          return (  
-            <Card title={item.title} companyName={item.company_name} location={item.location} missing={item.missing_skills} companySkills={item.company_skills} pay={item.avg_base_pay_est} link={item.company_link} matching={item.matching_skills}/>
+          console.log(item);
+          return (
+            <Card
+              title={item.title}
+              companyName={item.company_name}
+              location={item.location}
+              missing={item.missing_skills}
+              companySkills={item.company_skills}
+              pay={item.avg_base_pay_est}
+              link={item.company_link}
+              matching={item.matching_skills}
+            />
           );
         })}
-        
       </div>
     </div>
   );

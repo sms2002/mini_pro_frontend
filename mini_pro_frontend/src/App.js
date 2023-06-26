@@ -10,9 +10,9 @@ import McqLandingPage from './Pages/McqLandingPage';
 import Analysis from './Pages/Analysis';
 import TestPage from './Pages/TestPage';
 import ErrorBoundary from './ErrorBoundary';
-import Prevtest from './Components/PrevTest/Prevtest';
 import PrevTestPage from './Pages/PrevTestPage';
 import ErrorComponent from './Components/ErrorComponent/ErrorComponent';
+import TableuPage from './Pages/TableuPage';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
       <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/test' element={<TestPage/>}/>
       <Route path='/prevtest' element={<PrevTestPage/>}/>
+      <Route path='/devsurvey' element={<TableuPage/>}/>
       <Route path="*" element={<ErrorComponent/>} />
      </Routes>
     </div>

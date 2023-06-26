@@ -47,3 +47,9 @@ input{
   overflow-y: scroll;
 padding-bottom: 7em;
 }
+.developersurvey
+{
+    position: absolute;
+    margin-top: 25em;
+    cursor: pointer;
+}
